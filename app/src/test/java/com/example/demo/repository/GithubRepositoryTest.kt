@@ -9,10 +9,10 @@ import org.junit.Assert
 
 class GithubRepositoryTest : TestCase() {
 
-    private lateinit var mockInterceptor:MockInterceptor
-    private lateinit var networkService : NetworkService
-    private lateinit var githubRemoteDataSource : GithubRemoteDataSource
-    private lateinit var githubRepository : GithubRepository
+    private lateinit var mockInterceptor: MockInterceptor
+    private lateinit var networkService: NetworkService
+    private lateinit var githubRemoteDataSource: GithubRemoteDataSource
+    private lateinit var githubRepository: GithubRepository
 
     override fun setUp() {
         mockInterceptor = MockInterceptor()
@@ -32,7 +32,7 @@ class GithubRepositoryTest : TestCase() {
         })
 
         val result = githubRepository
-            .getGithubUserList()
+            .getGithubUserList(1, 20)
             .blockingGet()
 
         Assert.assertTrue(result.isSuccessful)
@@ -54,13 +54,13 @@ class GithubRepositoryTest : TestCase() {
         mockInterceptor.setListener(object : MockInterceptor.MockInterceptorListener {
             override fun setApiResponse(url: String): MockResponse {
                 val status = 200;
-                val response = Utils.readText("fakeUserDetail.json")
+                val response = Utils.readText("api/fakeUserDetail.json")
                 return MockResponse(status, response)
             }
         })
 
         val result = githubRepository
-            .getGithubUserDetail()
+            .getGithubUserDetail("mojombo")
             .blockingGet()
 
         Assert.assertTrue(result.isSuccessful)
