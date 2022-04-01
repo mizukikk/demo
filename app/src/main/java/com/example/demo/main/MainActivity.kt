@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.demo.R
+import com.example.demo.main.user.UserDetailFragment
 import com.example.demo.main.user.UserListFragment
+import com.example.demo.main.user.data.UserDetailArgs
 
 class MainActivity : AppCompatActivity(), MainInteractivity {
 
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity(), MainInteractivity {
                 }
                 transition.add(R.id.container, this)
                     .addToBackStack(this::class.java.simpleName)
+                    .commit()
             }
         }
     }
@@ -63,5 +66,9 @@ class MainActivity : AppCompatActivity(), MainInteractivity {
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
+    }
+
+    override fun setUserDetailFragment(args: UserDetailArgs) {
+        UserDetailFragment.newInstance(args).beginTransactionStack()
     }
 }

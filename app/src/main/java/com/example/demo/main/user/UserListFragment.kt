@@ -10,6 +10,7 @@ import com.example.demo.api.obj.GithubUser
 import com.example.demo.databinding.FragmentUserListBinding
 import com.example.demo.main.MainInteractivity
 import com.example.demo.main.user.adapter.GithubUserAdapter
+import com.example.demo.main.user.data.UserDetailArgs
 import com.example.demo.main.user.present.UserListPresenter
 import com.example.demo.ui.base.BaseFragment
 import org.koin.android.ext.android.get
@@ -34,9 +35,9 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
         binding.refreshUser.setOnRefreshListener {
             present.refreshList(githubUserAdapter.itemCount)
         }
-        githubUserAdapter.setListener(object :GithubUserAdapter.GithubUserListener{
-            override fun openDetailPage(user: GithubUser) {
-
+        githubUserAdapter.setListener(object : GithubUserAdapter.GithubUserListener {
+            override fun openDetailPage(args: UserDetailArgs) {
+                parentActivity?.setUserDetailFragment(args)
             }
         })
     }

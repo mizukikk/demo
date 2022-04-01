@@ -10,6 +10,7 @@ import coil.transform.CircleCropTransformation
 import com.example.demo.R
 import com.example.demo.api.obj.GithubUser
 import com.example.demo.databinding.ItemGithubUserBinding
+import com.example.demo.main.user.data.UserDetailArgs
 
 class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolder>() {
 
@@ -71,7 +72,7 @@ class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolde
     }
 
     interface GithubUserListener {
-        fun openDetailPage(user: GithubUser)
+        fun openDetailPage(args: UserDetailArgs)
     }
 
     inner class GithubUserHolder(private val binding: ItemGithubUserBinding) :
@@ -85,7 +86,8 @@ class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolde
         private fun setListener(user: GithubUser) {
             binding.root.setOnClickListener {
                 if (enableClick) {
-                    listener?.openDetailPage(user)
+                    val args = UserDetailArgs(user.login)
+                    listener?.openDetailPage(args)
                 }
             }
         }
