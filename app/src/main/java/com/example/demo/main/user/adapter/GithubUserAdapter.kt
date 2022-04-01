@@ -14,6 +14,12 @@ import com.example.demo.databinding.ItemGithubUserBinding
 class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolder>() {
 
     private var githubUserList = listOf<GithubUser>()
+    val lastId
+        get() = try {
+            githubUserList.last().id
+        } catch (e: NoSuchElementException) {
+            -1
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -35,7 +41,8 @@ class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolde
     }
 
     fun addData(newGithubUserList: List<GithubUser>) {
-        val oldList = githubUserList
+        val oldList = mutableListOf<GithubUser>()
+        oldList.addAll(githubUserList)
 
         val newList = mutableListOf<GithubUser>()
         newList.addAll(oldList)
@@ -51,7 +58,7 @@ class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolde
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(user: GithubUser) {
             binding.tvStaff.visibility = if (user.siteAdmin) View.VISIBLE else View.GONE
-            binding.tvName.text = user.name
+            binding.tvName.text = user.login
             binding.ivAvatar.load(user.avatarUrl) {
                 placeholder(R.drawable.ic_default_avatar)
                 error(R.drawable.ic_default_avatar)

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.demo.R
+import com.example.demo.main.user.UserListFragment
 
 class MainActivity : AppCompatActivity(), MainInteractivity {
 
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity(), MainInteractivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        UserListFragment().beginTransaction()
     }
 
     fun Fragment.beginTransaction() {

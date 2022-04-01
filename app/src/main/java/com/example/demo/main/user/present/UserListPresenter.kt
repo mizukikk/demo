@@ -38,7 +38,7 @@ class UserListPresenter(
 
     @Synchronized
     override fun loadNextList(lastId: Int, itemCount: Int) {
-        if (itemCount >= MAXIMUM_ITEM_COUNT)
+        if (itemCount >= MAXIMUM_ITEM_COUNT || lastId < 0)
             return
         if (lastId != currentLastId && isLoadNext.not()) {
             isLoadNext = true
@@ -47,7 +47,7 @@ class UserListPresenter(
                 .observeOn(SchedulersProvider.mainThread())
                 .subscribe({
                     if (it.isSuccessful) {
-                        view?.postUserList(it.body()!!)
+                        view?.newUserList(it.body()!!)
                     }
                     isLoadNext = false
                 }, {
