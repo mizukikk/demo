@@ -14,11 +14,23 @@ import com.example.demo.databinding.ItemGithubUserBinding
 class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolder>() {
 
     private var githubUserList = listOf<GithubUser>()
+    private var listener: GithubUserListener? = null
     val lastId
         get() = try {
             githubUserList.last().id
         } catch (e: NoSuchElementException) {
             -1
+        }
+
+    private var lastClickMillis = 0L
+    private val enableClick
+        get():Boolean {
+            val currentMillis = System.currentTimeMillis()
+            val diff = currentMillis - lastClickMillis
+            val enable = diff >= 200
+            if (enable)
+                lastClickMillis = currentMillis
+            return enable
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserHolder {
@@ -54,10 +66,35 @@ class GithubUserAdapter : RecyclerView.Adapter<GithubUserAdapter.GithubUserHolde
         this.githubUserList = newList
     }
 
+    fun setListener(listener: GithubUserListener) {
+        this.listener = listener
+    }
+
+    interface GithubUserListener {
+        fun openDetailPage(user: GithubUser)
+    }
+
     inner class GithubUserHolder(private val binding: ItemGithubUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(user: GithubUser) {
+            setItemState(user)
+            setItemDate(user)
+            setListener(user)
+        }
+
+        private fun setListener(user: GithubUser) {
+            binding.root.setOnClickListener {
+                if (enableClick) {
+                    listener?.openDetailPage(user)
+                }
+            }
+        }
+
+        private fun setItemState(user: GithubUser) {
             binding.tvStaff.visibility = if (user.siteAdmin) View.VISIBLE else View.GONE
+        }
+
+        private fun setItemDate(user: GithubUser) {
             binding.tvName.text = user.login
             binding.ivAvatar.load(user.avatarUrl) {
                 placeholder(R.drawable.ic_default_avatar)

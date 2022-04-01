@@ -26,10 +26,19 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initPresent()
         initView()
+        setListener()
+        present.loadFirstList()
+    }
+
+    private fun setListener() {
         binding.refreshUser.setOnRefreshListener {
             present.refreshList(githubUserAdapter.itemCount)
         }
-        present.loadFirstList()
+        githubUserAdapter.setListener(object :GithubUserAdapter.GithubUserListener{
+            override fun openDetailPage(user: GithubUser) {
+
+            }
+        })
     }
 
     private fun initView() {
