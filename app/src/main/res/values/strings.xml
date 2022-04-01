@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">demo</string>
+
+    <string name="f_user_detail_staff">STAFF</string>
+
     <string name="item_github_user_staff">STAFF</string>
+
+    <string name="dialog_message_service_error">讀取錯誤請稍後再嘗試</string>
+
+    <string name="button_ok">確定</string>
 </resources>
