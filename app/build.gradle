@@ -81,4 +81,9 @@ dependencies {
     //Rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    //koin 依賴注入框架
+    def koin_version= "3.1.5"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
