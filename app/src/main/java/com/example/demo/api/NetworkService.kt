@@ -16,7 +16,7 @@ class NetworkService(interceptor: Interceptor?) {
         private const val CONNECT_TIME_OUT = 30L
     }
 
-    val serviceApi: GithubService
+    val githubService: GithubService
 
     init {
         val clientBuilder = OkHttpClient.Builder()
@@ -35,6 +35,6 @@ class NetworkService(interceptor: Interceptor?) {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        serviceApi = retrofit.create(GithubService::class.java)
+        githubService = retrofit.create(GithubService::class.java)
     }
 }
