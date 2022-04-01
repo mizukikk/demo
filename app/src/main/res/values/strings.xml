@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">demo</string>
+    <string name="item_github_user_staff">STAFF</string>
 </resources>
