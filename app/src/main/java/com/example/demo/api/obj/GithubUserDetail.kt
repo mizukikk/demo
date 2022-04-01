@@ -7,7 +7,7 @@ data class GithubUserDetail(
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("bio")
-    val bio: String,
+    val bio: String?,
     @SerializedName("blog")
     val blog: String,
     @SerializedName("company")
@@ -31,7 +31,7 @@ data class GithubUserDetail(
     @SerializedName("gravatar_id")
     val gravatarId: String,
     @SerializedName("hireable")
-    val hireable: Boolean,
+    val hireable: Boolean?,
     @SerializedName("html_url")
     val htmlUrl: String,
     @SerializedName("id")

@@ -1,3 +1,5 @@
+package productflavorsample
+
 import io.reactivex.schedulers.Schedulers
 
 class SchedulersProvider {
