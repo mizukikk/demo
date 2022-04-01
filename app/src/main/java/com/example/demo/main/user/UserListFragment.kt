@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.example.demo.R
+import com.example.demo.api.obj.GithubUser
 import com.example.demo.databinding.FragmentUserListBinding
 import com.example.demo.main.MainInteractivity
 import com.example.demo.main.user.present.UserListPresenter
@@ -37,6 +38,14 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
     override fun onDestroyView() {
         super.onDestroyView()
         present.clear()
+    }
+
+    override fun postUserList(list: List<GithubUser>) {
+
+    }
+
+    override fun newUserList(list: List<GithubUser>) {
+
     }
 
     override fun showProgress() {

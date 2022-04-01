@@ -8,7 +8,7 @@ import io.reactivex.Single
 import retrofit2.Response
 
 class GithubRepository(
-    private val githubDataSource: GithubRemoteDataSource
+    private val githubDataSource: IGithubRemoteDataSource
 ) : IGithubRemoteDataSource {
 
     companion object {
